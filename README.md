@@ -1,6 +1,6 @@
-# Loop Scroll Rect
+# Loop Scroll Rect 
 
-# This is a fork from LoopScrollRect by 
+# This is a fork from LoopScrollRect by Kanglai Qian
  - You can now add a gameobject as data source instead of using the name of clone objects. 
  - Each cell will receive two messages to determine index and datasource object when being assigned. E.g:
 To assign an array of objects:
