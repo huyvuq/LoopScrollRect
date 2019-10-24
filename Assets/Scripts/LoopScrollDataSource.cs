@@ -32,6 +32,7 @@ namespace UnityEngine.UI
         public override void ProvideData(Transform transform, int idx)
         {
             transform.SendMessage("ScrollCellContent", objectsToFill[idx]);
-        }
-    }
+			transform.SendMessage("ScrollCellIndex", idx, SendMessageOptions.DontRequireReceiver);
+		}
+	}
 }

@@ -39,21 +39,21 @@ namespace SG
                 return mInstance;
             }
         }
-        public void InitPool(string poolName, int size, PoolInflationType type = PoolInflationType.DOUBLE)
+        public void InitPool(GameObject poolGameObject, int size, PoolInflationType type = PoolInflationType.DOUBLE)
         {
-            if (poolDict.ContainsKey(poolName))
+            if (poolDict.ContainsKey(poolGameObject.name))
             {
                 return;
             }
             else
             {
-                GameObject pb = Resources.Load<GameObject>(poolName);
+                GameObject pb = (GameObject)poolGameObject;
                 if (pb == null)
                 {
-                    Debug.LogError("[ResourceManager] Invalide prefab name for pooling :" + poolName);
+                    Debug.LogError("[ResourceManager] Invalide prefab name for pooling :" + poolGameObject.name);
                     return;
                 }
-                poolDict[poolName] = new Pool(poolName, pb, gameObject, size, type);
+                poolDict[poolGameObject.name] = new Pool(poolGameObject.name, pb, gameObject, size, type);
             }
         }
 
@@ -63,31 +63,31 @@ namespace SG
         /// </summary>
         /// <param name="poolName"></param>
         /// <returns></returns>
-        public GameObject GetObjectFromPool(string poolName, bool autoActive = true, int autoCreate = 0)
+        public GameObject GetObjectFromPool(GameObject poolGameObject, bool autoActive = true, int autoCreate = 0)
         {
             GameObject result = null;
 
-            if (!poolDict.ContainsKey(poolName) && autoCreate > 0)
+            if (!poolDict.ContainsKey(poolGameObject.name) && autoCreate > 0)
             {
-                InitPool(poolName, autoCreate, PoolInflationType.INCREMENT);
+                InitPool(poolGameObject, autoCreate, PoolInflationType.INCREMENT);
             }
 
-            if (poolDict.ContainsKey(poolName))
+            if (poolDict.ContainsKey(poolGameObject.name))
             {
-                Pool pool = poolDict[poolName];
+                Pool pool = poolDict[poolGameObject.name];
                 result = pool.NextAvailableObject(autoActive);
                 //scenario when no available object is found in pool
 #if UNITY_EDITOR
                 if (result == null)
                 {
-                    Debug.LogWarning("[ResourceManager]:No object available in " + poolName);
+                    Debug.LogWarning("[ResourceManager]:No object available in " + poolGameObject.name);
                 }
 #endif
             }
 #if UNITY_EDITOR
             else
             {
-                Debug.LogError("[ResourceManager]:Invalid pool name specified: " + poolName);
+                Debug.LogError("[ResourceManager]:Invalid pool name specified: " + poolGameObject.name);
             }
 #endif
             return result;

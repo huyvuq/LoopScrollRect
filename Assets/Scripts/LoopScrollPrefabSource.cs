@@ -6,7 +6,7 @@ namespace UnityEngine.UI
     [System.Serializable]
     public class LoopScrollPrefabSource 
     {
-        public string prefabName;
+        public GameObject prefab;
         public int poolSize = 5;
 
         private bool inited = false;
@@ -14,10 +14,10 @@ namespace UnityEngine.UI
         {
             if(!inited)
             {
-                SG.ResourceManager.Instance.InitPool(prefabName, poolSize);
+                SG.ResourceManager.Instance.InitPool(prefab, poolSize);
                 inited = true;
             }
-            return SG.ResourceManager.Instance.GetObjectFromPool(prefabName);
+            return SG.ResourceManager.Instance.GetObjectFromPool(prefab);
         }
 
         public virtual void ReturnObject(Transform go)

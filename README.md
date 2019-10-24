@@ -1,12 +1,34 @@
 # Loop Scroll Rect
 
+# This is a fork from LoopScrollRect by 
+ - You can now add a gameobject as data source instead of using the name of clone objects. 
+ - Each cell will receive two messages to determine index and datasource object when being assigned. E.g:
+To assign an array of objects:
+	var objects = ...;
+        loopScrollRect.objectsToFill = objects;
+	loopScrollRect.totalCount = objects.Lenght;
+        loopScrollRect.RefillCellsFromEnd(objects.Lenght);
+        loopScrollRect.RefreshCells();
+
+When a cell is displayed/reused, these two functions will be called:
+
+    void ScrollCellContent(YourClass object)
+    {
+        Debug.Log(object);
+    }
+
+    void ScrollCellIndex(int idx)
+    {
+        Debug.Log(idx);
+    }
+
 ## v1.04
 
 __This project works for Unity 5.2 or newer.__ I havn't tested older versions and any Pull Requests are welcomed.
 
 These scripts help make your ScrollRect `Reusable`, because it will only build cells when needed. If you have a large number of cells in a scroll rect, you absolutely need it! It will save a lot of time loading and draw call, along with memory in use, while still working smoothly.
 
-中文说明请看[这里](http://qiankanglai.me/2015/08/15/LoopScrollRect/)。
+http://qiankanglai.me/2015/08/15/LoopScrollRect/
 
 ## Demo
 
