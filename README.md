@@ -5,12 +5,13 @@
  - Each cell will receive two messages to determine index and datasource object when being assigned. E.g:
 To assign an array of objects:
 
-	var objects = ...;
-        loopScrollRect.objectsToFill = objects;
-	loopScrollRect.totalCount = objects.Lenght;
-        loopScrollRect.RefillCellsFromEnd(objects.Lenght);
-        loopScrollRect.RefreshCells();
-
+	void YourFunction(){
+		var objects = ...;
+		loopScrollRect.objectsToFill = objects;
+		loopScrollRect.totalCount = objects.Lenght;
+		loopScrollRect.RefillCellsFromEnd(objects.Lenght);
+		loopScrollRect.RefreshCells();
+	}
     
 When a cell is displayed/reused, these two functions will be called:
 
@@ -23,7 +24,8 @@ When a cell is displayed/reused, these two functions will be called:
     {
         Debug.Log(idx);
     }
-
+    
+## Begin forwarding
 ## v1.04
 
 __This project works for Unity 5.2 or newer.__ I havn't tested older versions and any Pull Requests are welcomed.
