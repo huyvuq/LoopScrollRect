@@ -4,12 +4,14 @@
  - You can now add a gameobject as data source instead of using the name of clone objects. 
  - Each cell will receive two messages to determine index and datasource object when being assigned. E.g:
 To assign an array of objects:
+
 	var objects = ...;
         loopScrollRect.objectsToFill = objects;
 	loopScrollRect.totalCount = objects.Lenght;
         loopScrollRect.RefillCellsFromEnd(objects.Lenght);
         loopScrollRect.RefreshCells();
 
+    
 When a cell is displayed/reused, these two functions will be called:
 
     void ScrollCellContent(YourClass object)
